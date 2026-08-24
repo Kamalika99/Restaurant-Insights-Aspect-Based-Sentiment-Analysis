@@ -1,0 +1,27 @@
+# Core data / ML
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+joblib>=1.3
+
+# Classical baseline visualization (used in notebooks/1. Food_reviews.ipynb)
+matplotlib>=3.7
+seaborn>=0.12
+wordcloud>=1.9
+
+# NLP for aspect extraction
+nltk>=3.9
+spacy>=3.7
+
+# Transformers for sentence-level sentiment fine-tuning experiments (notebook 2)
+# and the pretrained DeBERTa-ABSA model (src/sentiment.py)
+torch>=2.1
+transformers>=4.40
+sentencepiece>=0.2  # required by DeBERTa-v2/v3 tokenizers
+
+# Testing
+pytest>=7.4
+
+# --- One-time setup after `pip install -r requirements.txt` ---
+# python -m spacy download en_core_web_md
+# python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab'); nltk.download('averaged_perceptron_tagger'); nltk.download('averaged_perceptron_tagger_eng'); nltk.download('stopwords')"

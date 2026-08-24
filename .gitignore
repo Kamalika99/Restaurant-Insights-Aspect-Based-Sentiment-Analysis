@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model caches / downloaded weights (HuggingFace, spaCy, NLTK)
+.cache/
+nltk_data/
+
+# Environment / secrets
+.env
+*.key
+
+# Large generated artifacts (regenerate via src/rating_classifier.py or notebooks)
+*.h5
+finetuned_*.model

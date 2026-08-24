@@ -1,0 +1,12 @@
+{
+  "model_name": "microsoft/deberta-v3-base",
+  "macro_f1": 0.7737855445450014,
+  "weighted_f1": 0.8708235776808274,
+  "accuracy": 0.8782701548318206,
+  "note": "Fine-tuned via src/transformer_rating_classifier.py using Hugging Face Trainer (fp32, attn_implementation=eager, lr=1e-5, warmup_steps=100, 3 epochs) on Google Colab GPU (T4), 2026-08-24. Epoch-level metrics from the actual run are in epoch_summary below (note these differ slightly from macro_f1/weighted_f1/accuracy above, which are computed on the held-out TEST set; epoch_summary rows are VALIDATION-set metrics recorded during training). Full per-step trainer.state.log_history is produced as training_log.json when the training function is re-run.",
+  "epoch_summary": [
+    {"epoch": 1, "training_loss": 0.319597, "validation_loss": 0.341928, "accuracy": 0.866489, "macro_f1": 0.762558, "weighted_f1": 0.861092},
+    {"epoch": 2, "training_loss": 0.272554, "validation_loss": 0.371515, "accuracy": 0.866489, "macro_f1": 0.749982, "weighted_f1": 0.856946},
+    {"epoch": 3, "training_loss": 0.283585, "validation_loss": 0.377355, "accuracy": 0.867824, "macro_f1": 0.758058, "weighted_f1": 0.861455}
+  ]
+}
