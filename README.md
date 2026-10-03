@@ -2,7 +2,7 @@
 
 Analyzes restaurant reviews at a granular, per-aspect level (food, service, ambience, price, hygiene, menu, portion) instead of a single overall rating — extracting the aspects actually mentioned in a review and predicting the sentiment associated with each one.
 
-Built and verified in two parts: a **zero-shot ABSA pipeline** (spaCy aspect extraction → pretrained DeBERTa-v3 ABSA model) and a **fine-tuned DeBERTa-v3 review-level sentiment classifier**, benchmarked against a TF-IDF + Logistic Regression baseline. Full engineering audit and debugging trail in [`AUDIT.md`](AUDIT.md).
+Built and verified in two parts: a **zero-shot ABSA pipeline** (spaCy aspect extraction → pretrained DeBERTa-v3 ABSA model) and a **fine-tuned DeBERTa-v3 review-level sentiment classifier**, benchmarked against a TF-IDF + Logistic Regression baseline.
 
 ## Results
 
@@ -54,7 +54,7 @@ A separate pipeline (`src/rating_classifier.py`, `src/transformer_rating_classif
 A single star rating tells you *whether* a customer was happy, not *why*. "3 stars" could mean great food and terrible service, or the reverse — very different, actionable feedback for a restaurant owner. ABSA answers "what did they think about *X* specifically" for each aspect mentioned, instead of collapsing everything into one label.
 
 ## Dataset
-`data/Restaurant reviews.csv` — 10,000 scraped restaurant reviews across 100 restaurants. Cleaned (deduplicated, malformed rows dropped, ratings normalized) before any modeling. No aspect-level ground truth exists in this dataset, which is why ABSA is evaluated qualitatively rather than against a benchmark F1 — see `AUDIT.md` for the full data audit.
+`data/Restaurant reviews.csv` — 10,000 scraped restaurant reviews across 100 restaurants. Cleaned (deduplicated, malformed rows dropped, ratings normalized) before any modeling. No aspect-level ground truth exists in this dataset .
 
 ## Installation
 ```bash
@@ -111,7 +111,6 @@ restaurant-insight-absa/
 ├── tests/
 ├── infer.py                            # CLI entry point
 ├── requirements.txt
-├── AUDIT.md                            # full audit trail, bugs found, and fixes applied
 └── README.md
 ```
 Note: the fine-tuned DeBERTa-v3 model weights (~370MB) are not committed to this repo — regenerate them with `transformer_rating_classifier.train_transformer()` above, or host them separately (e.g. Hugging Face Hub / Git LFS) if needed.
@@ -121,8 +120,3 @@ Note: the fine-tuned DeBERTa-v3 model weights (~370MB) are not committed to this
 - **Sentence-level context per aspect, not whole-review:** each aspect is scored against the sentence(s) that actually mention it, to avoid sentiment leaking across unrelated aspects in the same review (e.g. "food was great, but service was terrible").
 - **No aspect-level benchmark metric is claimed**, because none exists for this data — ABSA quality is demonstrated qualitatively (see Results above) rather than with an invented number.
 
-## Tests
-```bash
-pytest tests/ -v
-```
-12 tests covering preprocessing, aspect vocabulary/grouping, and the rating classifier's data cleaning, label encoding, and leakage prevention.
